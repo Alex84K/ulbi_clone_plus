@@ -1,6 +1,6 @@
 import { Expose } from 'class-transformer';
 
-export class UserRoleDto {
+export class UserRoleDto  {
     @Expose()
     id: number;
 
@@ -11,7 +11,7 @@ export class UserRoleDto {
     description: string;
 
 
-    constructor(role: any) { // Замените 'any' на ваш тип пользователя
+    constructor(role: UserRoleDto) { // Замените 'any' на ваш тип пользователя
         this.id = role.id;
         this.value = role.value;
         this.description = role.description;

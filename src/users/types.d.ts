@@ -17,6 +17,19 @@ export interface UserResponceDto {
     roles: UserRoleDto[];
 }
 
+export interface UserRespDto {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    banned: boolean;
+    banReason: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+    roles: UserRoleDto[];
+}
+
+
 export interface UserRoleDto {
     id: number;
     roleId: number;
