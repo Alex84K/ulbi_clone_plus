@@ -1,8 +1,10 @@
-import {Body, Controller, Post, Res} from '@nestjs/common';
+import {Body, Controller, Get, Post, Req, Res} from '@nestjs/common';
 import { ApiTags} from "@nestjs/swagger";
 import { UserCreateDto } from 'src/users/dto/UserCreateDto';
 import { AuthService } from './auth.service';
-import { Response } from 'express';
+import { Response, Request } from 'express';
+import { User } from 'src/users/user.entity';
+import { UserResponceDto } from 'src/users/types';
 
 @ApiTags('Авторизация')
 @Controller('auth')
@@ -25,8 +27,11 @@ export class AuthController {
 
     @Post('logout')
     async logout(@Res() res: Response) {
-        // Сбрасываем cookie с токеном
-        res.clearCookie('token'); // Убедитесь, что имя cookie совпадает с тем, что вы используете
-        return res.status(200).json({ message: 'Вы успешно вышли из системы' });
+        this.authService.logout(res)
+    }
+
+    @Get('me')
+    async me(@Res() res: Response, @Req() req: Request): Promise<UserResponceDto> {
+        return this.authService.me(res, req)
     }
 }
